@@ -4,8 +4,21 @@ import 'package:ping_coming_soon_page/theme.dart';
 import 'package:ping_coming_soon_page/utils/addSpace.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final myTextController = TextEditingController();
+
+  @override
+  void dispose() {
+    myTextController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +90,7 @@ class HomePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             TextField(
+                              controller: myTextController,
                               decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -116,7 +130,9 @@ class HomePage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(60),
                               ),
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  debugPrint("${myTextController.value.text}");
+                                },
                                 style: TextButton.styleFrom(
                                   padding: EdgeInsets.symmetric(
                                     vertical: 20,
