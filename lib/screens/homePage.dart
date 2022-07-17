@@ -125,6 +125,7 @@ class HomePage extends StatelessWidget {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(60),
                                   ),
+                                  primary: Colors.white,
                                 ),
                                 child: Text(
                                   "Notify Me",
@@ -156,22 +157,24 @@ class HomePage extends StatelessWidget {
                               Container(
                                 width: 40,
                                 height: 40,
-                                padding: EdgeInsets.all(0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Colors.white,
                                   border: Border.all(
                                     color: COLOR_PALE_BLUE.toColor(),
                                     width: 1,
                                   ),
                                 ),
-                                child: IconButton(
-                                  padding: EdgeInsets.all(0),
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    FontAwesomeIcons.facebookF,
-                                    color: COLOR_BLUE.toColor(),
-                                    size: 20,
+                                child: Material(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Colors.white,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(50),
+                                    onTap: () {},
+                                    child: Icon(
+                                      FontAwesomeIcons.facebookF,
+                                      color: COLOR_BLUE.toColor(),
+                                      size: 20,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -179,24 +182,24 @@ class HomePage extends StatelessWidget {
                               Container(
                                 width: 40,
                                 height: 40,
-                                padding: EdgeInsets.all(0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Colors.white,
                                   border: Border.all(
                                     color: COLOR_PALE_BLUE.toColor(),
                                     width: 1,
                                   ),
                                 ),
-                                child: IconButton(
-                                  padding: EdgeInsets.all(0),
-                                  onPressed: () {
-                                    debugPrint("Sup");
-                                  },
-                                  icon: Icon(
-                                    FontAwesomeIcons.twitter,
-                                    color: COLOR_BLUE.toColor(),
-                                    size: 20,
+                                child: Material(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Colors.white,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(50),
+                                    onTap: () {},
+                                    child: Icon(
+                                      FontAwesomeIcons.twitter,
+                                      color: COLOR_BLUE.toColor(),
+                                      size: 20,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -204,22 +207,24 @@ class HomePage extends StatelessWidget {
                               Container(
                                 width: 40,
                                 height: 40,
-                                padding: EdgeInsets.all(0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(50),
-                                  color: Colors.white,
                                   border: Border.all(
                                     color: COLOR_PALE_BLUE.toColor(),
                                     width: 1,
                                   ),
                                 ),
-                                child: IconButton(
-                                  padding: EdgeInsets.all(0),
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    FontAwesomeIcons.instagram,
-                                    color: COLOR_BLUE.toColor(),
-                                    size: 20,
+                                child: Material(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Colors.white,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(50),
+                                    onTap: () {},
+                                    child: Icon(
+                                      FontAwesomeIcons.instagram,
+                                      color: COLOR_BLUE.toColor(),
+                                      size: 20,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -230,7 +235,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      addVerticalSpace(20),
+                      addVerticalSpace(30),
                       RichText(
                         text: TextSpan(
                           children: [
@@ -252,6 +257,7 @@ class HomePage extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: 'LibreFranklin',
                                   color: COLOR_GRAY.toColor(),
+                                  fontSize: 13,
                                 ),
                               ),
                             ),
