@@ -13,6 +13,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final myTextController = TextEditingController();
+  var _text = '';
+
+  String? get _errorText {
+    final text = myTextController.value.text;
+    if (text.isEmpty)
+      return "Whoops! It looks like you forgot to add your email";
+
+    return null;
+  }
 
   @override
   void dispose() {
@@ -91,7 +100,31 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             TextField(
                               controller: myTextController,
+                              onChanged: (text) => setState(
+                                () {
+                                  _text;
+                                },
+                              ),
                               decoration: InputDecoration(
+                                errorText: _errorText,
+                                errorStyle: TextStyle(
+                                  fontFamily: "LibreFranklin",
+                                  fontSize: 9,
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: COLOR_LIGHT_RED.toColor(),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(70),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: COLOR_LIGHT_RED.toColor(),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(70),
+                                ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: COLOR_BLUE.toColor(),
@@ -124,7 +157,9 @@ class _HomePageState extends State<HomePage> {
                                 boxShadow: [
                                   BoxShadow(
                                     offset: Offset(0, 2),
-                                    blurRadius: 6.0,
+                                    blurRadius: 2.0,
+                                    spreadRadius: 0.5,
+                                    color: COLOR_PALE_BLUE.toColor(),
                                   ),
                                 ],
                                 borderRadius: BorderRadius.circular(60),
@@ -135,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                                 },
                                 style: TextButton.styleFrom(
                                   padding: EdgeInsets.symmetric(
-                                    vertical: 20,
+                                    vertical: 23,
                                   ),
                                   backgroundColor: COLOR_BLUE.toColor(),
                                   shape: RoundedRectangleBorder(
