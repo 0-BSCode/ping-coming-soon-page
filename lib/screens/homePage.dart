@@ -23,12 +23,13 @@ class _HomePageState extends State<HomePage> {
               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
           .hasMatch(text);
 
-      if (text.isEmpty)
+      if (text.isEmpty) {
         errorText = "Whoops! It looks like you forgot to add your email";
-      else if (!emailValid)
+      } else if (!emailValid) {
         errorText = "Please provide a valid email address";
-      else
+      } else {
         errorText = null;
+      }
     });
   }
 
@@ -104,101 +105,214 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            TextField(
-                              controller: myTextController,
-                              onChanged: (text) => setState(
-                                () {
-                                  _text;
-                                },
-                              ),
-                              decoration: InputDecoration(
-                                errorText: errorText,
-                                errorStyle: TextStyle(
-                                  fontFamily: "LibreFranklin",
-                                  fontSize: 9,
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: COLOR_LIGHT_RED.toColor(),
-                                    width: 1.0,
+                        child: constraints.maxWidth < 768
+                            ? Column(
+                                children: [
+                                  TextField(
+                                    controller: myTextController,
+                                    onChanged: (text) => setState(
+                                      () {
+                                        _text;
+                                      },
+                                    ),
+                                    decoration: InputDecoration(
+                                      errorText: errorText,
+                                      errorStyle: TextStyle(
+                                        fontFamily: "LibreFranklin",
+                                        fontSize: 9,
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: COLOR_LIGHT_RED.toColor(),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius: BorderRadius.circular(70),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: COLOR_LIGHT_RED.toColor(),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius: BorderRadius.circular(70),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: COLOR_BLUE.toColor(),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius: BorderRadius.circular(70),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: COLOR_BLUE.toColor(),
+                                          width: 1.0,
+                                        ),
+                                        borderRadius: BorderRadius.circular(70),
+                                      ),
+                                      labelText: "Your email address...",
+                                      labelStyle: TextStyle(
+                                        fontFamily: 'LibreFranklin',
+                                        fontWeight: FontWeight.w300,
+                                        color: COLOR_GRAY.toColor(),
+                                      ),
+                                      contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 35,
+                                      ),
+                                    ),
                                   ),
-                                  borderRadius: BorderRadius.circular(70),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: COLOR_LIGHT_RED.toColor(),
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(70),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: COLOR_BLUE.toColor(),
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(70),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: COLOR_BLUE.toColor(),
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(70),
-                                ),
-                                labelText: "Your email address...",
-                                labelStyle: TextStyle(
-                                  fontFamily: 'LibreFranklin',
-                                  fontWeight: FontWeight.w300,
-                                  color: COLOR_GRAY.toColor(),
-                                ),
-                                contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 35,
-                                ),
-                              ),
-                            ),
-                            addVerticalSpace(15),
-                            Container(
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0, 2),
-                                    blurRadius: 2.0,
-                                    spreadRadius: 0.5,
-                                    color: COLOR_PALE_BLUE.toColor(),
+                                  addVerticalSpace(15),
+                                  Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          offset: Offset(0, 2),
+                                          blurRadius: 2.0,
+                                          spreadRadius: 0.5,
+                                          color: COLOR_PALE_BLUE.toColor(),
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.circular(60),
+                                    ),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        _submit();
+                                      },
+                                      style: TextButton.styleFrom(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 23,
+                                        ),
+                                        backgroundColor: COLOR_BLUE.toColor(),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(60),
+                                        ),
+                                        primary: Colors.white,
+                                      ),
+                                      child: Text(
+                                        "Notify Me",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'LibreFranklin',
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ],
-                                borderRadius: BorderRadius.circular(60),
-                              ),
-                              child: TextButton(
-                                onPressed: () {
-                                  _submit();
-                                },
-                                style: TextButton.styleFrom(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 23,
-                                  ),
-                                  backgroundColor: COLOR_BLUE.toColor(),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(60),
-                                  ),
-                                  primary: Colors.white,
+                              )
+                            : Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
                                 ),
-                                child: Text(
-                                  "Notify Me",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'LibreFranklin',
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 10,
+                                      child: TextField(
+                                        controller: myTextController,
+                                        onChanged: (text) => setState(
+                                          () {
+                                            _text;
+                                          },
+                                        ),
+                                        decoration: InputDecoration(
+                                          errorText: errorText,
+                                          errorStyle: TextStyle(
+                                            fontFamily: "LibreFranklin",
+                                            fontSize: 9,
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: COLOR_LIGHT_RED.toColor(),
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(70),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: COLOR_LIGHT_RED.toColor(),
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(70),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: COLOR_BLUE.toColor(),
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(70),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: COLOR_BLUE.toColor(),
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(70),
+                                          ),
+                                          labelText: "Your email address...",
+                                          labelStyle: TextStyle(
+                                            fontFamily: 'LibreFranklin',
+                                            fontWeight: FontWeight.w300,
+                                            color: COLOR_GRAY.toColor(),
+                                          ),
+                                          contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 35,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(child: Container()),
+                                    Expanded(
+                                      flex: 3,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              offset: Offset(0, 2),
+                                              blurRadius: 2.0,
+                                              spreadRadius: 0.5,
+                                              color: COLOR_PALE_BLUE.toColor(),
+                                            ),
+                                          ],
+                                          borderRadius:
+                                              BorderRadius.circular(60),
+                                        ),
+                                        child: TextButton(
+                                          onPressed: () {
+                                            _submit();
+                                          },
+                                          style: TextButton.styleFrom(
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: 23,
+                                            ),
+                                            backgroundColor:
+                                                COLOR_BLUE.toColor(),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(60),
+                                            ),
+                                            primary: Colors.white,
+                                          ),
+                                          child: Text(
+                                            "Notify Me",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: 'LibreFranklin',
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
                       ),
                       addVerticalSpace(70),
                       Image.asset(
