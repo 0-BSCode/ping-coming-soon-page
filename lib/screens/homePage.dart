@@ -14,13 +14,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final myTextController = TextEditingController();
   var _text = '';
+  String? errorText = null;
 
-  String? get _errorText {
-    final text = myTextController.value.text;
-    if (text.isEmpty)
-      return "Whoops! It looks like you forgot to add your email";
+  void _submit() {
+    setState(() {
+      final text = myTextController.value.text;
+      bool emailValid = RegExp(
+              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          .hasMatch(text);
 
-    return null;
+      if (text.isEmpty)
+        errorText = "Whoops! It looks like you forgot to add your email";
+      else if (!emailValid)
+        errorText = "Please provide a valid email address";
+      else
+        errorText = null;
+    });
   }
 
   @override
@@ -106,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                                 },
                               ),
                               decoration: InputDecoration(
-                                errorText: _errorText,
+                                errorText: errorText,
                                 errorStyle: TextStyle(
                                   fontFamily: "LibreFranklin",
                                   fontSize: 9,
@@ -166,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               child: TextButton(
                                 onPressed: () {
-                                  debugPrint("${myTextController.value.text}");
+                                  _submit();
                                 },
                                 style: TextButton.styleFrom(
                                   padding: EdgeInsets.symmetric(
