@@ -8,6 +8,8 @@ class RootSizeProvider with ChangeNotifier, DiagnosticableTreeMixin {
 
   void setRootSize(double newSize) {
     _rootSize = newSize;
+    // No notify listeners bc only time this is called
+    // is on build time, where no listeners exist
   }
 
   @override
