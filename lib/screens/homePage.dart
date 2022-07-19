@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ping_coming_soon_page/components/header.dart';
 import 'package:ping_coming_soon_page/theme.dart';
 import 'package:ping_coming_soon_page/utils/addSpace.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ping_coming_soon_page/utils/emailTextProvider.dart';
+import 'package:ping_coming_soon_page/providers/emailTextProvider.dart';
+import 'package:ping_coming_soon_page/utils/determineRootSize.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,8 +23,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // Points to the same provider as the emailTextProvider later
     // Assigning it to variable = more concise
-    final EmailText emailTextProvider =
-        Provider.of<EmailText>(context, listen: false);
+    final EmailTextProvider emailTextProvider =
+        Provider.of<EmailTextProvider>(context, listen: false);
 
     super.initState();
 
@@ -55,11 +57,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final EmailText emailTextProvider = Provider.of<EmailText>(context);
+    determineRootSize(context);
+    final EmailTextProvider emailTextProvider =
+        Provider.of<EmailTextProvider>(context);
     return SafeArea(
       child: Scaffold(
         body: LayoutBuilder(
           builder: (context, constraints) {
+            print('From container: ${constraints.maxWidth}');
             return Container(
               width: constraints.maxWidth,
               height: constraints.maxHeight,
@@ -76,45 +81,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: Column(
                     children: [
-                      SvgPicture.asset(
-                        "assets/images/logo.svg",
-                        semanticsLabel: 'PING Logo',
-                      ),
-                      addVerticalSpace(60),
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: "We are launching ",
-                              style: TextStyle(
-                                fontFamily: "LibreFranklin",
-                                fontWeight: FontWeight.w300,
-                                color: Colors.black,
-                                fontSize: 25,
-                              ),
-                            ),
-                            TextSpan(
-                              text: "soon!",
-                              style: TextStyle(
-                                fontFamily: "LibreFranklin",
-                                fontWeight: FontWeight.w700,
-                                color: Colors.black,
-                                fontSize: 25,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      addVerticalSpace(30),
-                      Text(
-                        "Subscribe and get notified",
-                        style: TextStyle(
-                          fontFamily: "LibreFranklin",
-                          fontWeight: FontWeight.w600,
-                          fontSize: 13,
-                          letterSpacing: 0.5,
-                        ),
-                      ),
+                      Header(),
                       addVerticalSpace(40),
                       Padding(
                         padding: const EdgeInsets.symmetric(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
-class EmailText with ChangeNotifier, DiagnosticableTreeMixin {
+class EmailTextProvider with ChangeNotifier, DiagnosticableTreeMixin {
   String _email = '';
 
   // Getter function

@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:ping_coming_soon_page/providers/rootSizeProvider.dart';
 import 'package:ping_coming_soon_page/screens/homePage.dart';
 import 'package:provider/provider.dart';
-import 'package:ping_coming_soon_page/utils/emailTextProvider.dart';
+import 'package:ping_coming_soon_page/providers/emailTextProvider.dart';
 
 void main() {
   // runApp(const MyApp());
@@ -10,7 +11,10 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => EmailText(),
+          create: (_) => EmailTextProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => RootSizeProvider(),
         ),
       ],
       child: MyApp(),
