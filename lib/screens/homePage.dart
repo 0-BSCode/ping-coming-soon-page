@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ping_coming_soon_page/theme.dart';
 import 'package:ping_coming_soon_page/utils/addSpace.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ping_coming_soon_page/utils/emailTextProvider.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -12,13 +14,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final myTextController = TextEditingController();
-  var _text = '';
+  TextEditingController myTextController = TextEditingController();
   String? errorText = null;
+
+  @override
+  void initState() {
+    // Points to the same provider as the emailTextProvider later
+    // Assigning it to variable = more concise
+    final EmailText emailTextProvider =
+        Provider.of<EmailText>(context, listen: false);
+
+    super.initState();
+
+    myTextController = TextEditingController(text: emailTextProvider.email);
+  }
+
+  @override
+  void dispose() {
+    myTextController.dispose();
+    super.dispose();
+  }
 
   void _submit() {
     setState(() {
       final text = myTextController.value.text;
+
       bool emailValid = RegExp(
               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
           .hasMatch(text);
@@ -34,13 +54,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void dispose() {
-    myTextController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final EmailText emailTextProvider = Provider.of<EmailText>(context);
     return SafeArea(
       child: Scaffold(
         body: LayoutBuilder(
@@ -110,11 +125,9 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   TextField(
                                     controller: myTextController,
-                                    onChanged: (text) => setState(
-                                      () {
-                                        _text;
-                                      },
-                                    ),
+                                    onChanged: (text) => {
+                                      emailTextProvider.changeEmail(text),
+                                    },
                                     decoration: InputDecoration(
                                       errorText: errorText,
                                       errorStyle: TextStyle(
@@ -206,16 +219,15 @@ class _HomePageState extends State<HomePage> {
                                   horizontal: 10,
                                 ),
                                 child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Expanded(
                                       flex: 10,
                                       child: TextField(
                                         controller: myTextController,
-                                        onChanged: (text) => setState(
-                                          () {
-                                            _text;
-                                          },
-                                        ),
+                                        onChanged: (text) => {
+                                          emailTextProvider.changeEmail(text),
+                                        },
                                         decoration: InputDecoration(
                                           errorText: errorText,
                                           errorStyle: TextStyle(
