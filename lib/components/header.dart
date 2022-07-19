@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ping_coming_soon_page/providers/rootSizeProvider.dart';
+import 'package:ping_coming_soon_page/theme.dart';
 import 'package:ping_coming_soon_page/utils/addSpace.dart';
 import 'package:ping_coming_soon_page/utils/determineRootSize.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,7 @@ class Header extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: "LibreFranklin",
                   fontWeight: FontWeight.w300,
-                  color: Colors.black,
+                  color: COLOR_GRAY.toColor(),
                   fontSize: rootSize * 1.25,
                 ),
               ),

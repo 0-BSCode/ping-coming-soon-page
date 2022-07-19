@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ping_coming_soon_page/providers/rootSizeProvider.dart';
 import 'package:ping_coming_soon_page/theme.dart';
 import 'package:ping_coming_soon_page/utils/addSpace.dart';
+import 'package:ping_coming_soon_page/utils/determineRootSize.dart';
 import 'package:provider/provider.dart';
 
 class Footer extends StatelessWidget {
@@ -10,6 +11,7 @@ class Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double rootSize = Provider.of<RootSizeProvider>(context).rootSize;
+    final double width = MediaQuery.of(context).size.width;
     return RichText(
       text: TextSpan(
         children: [
@@ -18,7 +20,9 @@ class Footer extends StatelessWidget {
             child: Icon(
               Icons.copyright,
               color: COLOR_GRAY.toColor(),
-              size: rootSize * 13 / 20,
+              size: width < deviceSizes['sm']!
+                  ? rootSize * 13 / 20
+                  : rootSize * 1 / 2,
             ),
           ),
           WidgetSpan(
@@ -31,7 +35,9 @@ class Footer extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'LibreFranklin',
                 color: COLOR_GRAY.toColor(),
-                fontSize: rootSize * 13 / 20,
+                fontSize: width < deviceSizes['sm']!
+                    ? rootSize * 13 / 20
+                    : rootSize * 1 / 2,
               ),
             ),
           ),

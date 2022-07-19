@@ -107,6 +107,7 @@ class _EmailFormState extends State<EmailForm> {
                       fontFamily: 'LibreFranklin',
                       fontWeight: FontWeight.w300,
                       color: COLOR_GRAY.toColor(),
+                      fontSize: rootSize * 13 / 20,
                     ),
                     contentPadding: EdgeInsets.symmetric(
                       horizontal: rootSize * 3 / 2,
@@ -163,7 +164,7 @@ class _EmailFormState extends State<EmailForm> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    flex: 10,
+                    flex: 8,
                     child: TextField(
                       controller: myTextController,
                       onChanged: (text) => {
@@ -216,7 +217,8 @@ class _EmailFormState extends State<EmailForm> {
                       ),
                     ),
                   ),
-                  Expanded(child: Container()),
+                  // Expanded(child: Container()),
+                  addHorizontalSpace(rootSize * 1 / 2),
                   Expanded(
                     flex: 3,
                     child: Container(
